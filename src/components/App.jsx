@@ -1,4 +1,4 @@
-import { Component, useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { nanoid } from "nanoid"
 import ContactForm from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactsList/ContactsList";
