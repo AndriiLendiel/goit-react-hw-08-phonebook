@@ -25,16 +25,11 @@ const ErrorField = ({name}) => {
 
 
 export const ContactForm = ({addContact}) => {
-const [name, setName] = useState('');
-const [number, setNumber] = useState('')
+
 
 
 const handleSubmit = (values, {resetForm})=> {
 const {name, number} =values;
-
-
-setName(name);
-setNumber(number)
 addContact(name,number)
 resetForm()
 }
