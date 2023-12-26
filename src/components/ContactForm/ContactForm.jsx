@@ -1,10 +1,11 @@
 import React from "react";
 import { Title } from "utils/utils";
 import {FormWrapper,MainForm,FormLabel,FormInput, FormButton, ErrorText} from "./ContactForm.styled";
-
+import { useSelector,useDispatch } from "react-redux";
 import { Formik, ErrorMessage} from "formik";
 import * as yup from 'yup';
-
+import {setContactsList} from '../../redux/contactsSlice'
+import { getContacts } from "../../redux/selectors";
 
 const contactSchema = yup.object().shape({
   name: yup.string().matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, 'не правильно введено дані').required('це поле обов`язкове'),
@@ -24,14 +25,23 @@ const ErrorField = ({name}) => {
 
 
 
-export const ContactForm = ({addContact}) => {
+export const ContactForm = () => {
+  const contactList = useSelector(getContacts);
+  const dispatch = useDispatch();
+
+
 
 
 
 const handleSubmit = (values, {resetForm})=> {
-const {name, number} =values;
-addContact(name,number)
-resetForm()
+const {name, number} = values;
+const contactData =  dispatch(setContactsList(name,number))
+if(contactList.some(el => el.name === contactData.payload.name)) {
+return  alert(`${name} is already in contacts`);
+
+};
+resetForm();
+
 }
 
 return (

@@ -9,7 +9,7 @@ export const contactsListSlice = createSlice({
     reducers: {
 setContactsList: {
     reducer(state, action){
-            state.push(action.payload)
+state.push(action.payload)
     },
     prepare(name, number) {
         return {
@@ -24,9 +24,8 @@ setContactsList: {
 deleteContact(state,action) {
 const idIndex = state.findIndex(el => el.id === action.payload)
 state.splice(idIndex, 1)
-
-} 
-    }
+}
+}
 }) 
 
 
