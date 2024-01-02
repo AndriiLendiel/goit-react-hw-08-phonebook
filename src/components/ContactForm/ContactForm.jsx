@@ -6,7 +6,7 @@ import { Formik, ErrorMessage} from "formik";
 import * as yup from 'yup';
 import {setContactsList} from '../../redux/contactsSlice'
 import { getContacts } from "../../redux/selectors";
-
+import { fetchContactsThunk, addContactsThunk } from "../../redux/operations";
 const contactSchema = yup.object().shape({
   name: yup.string().matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, 'не правильно введено дані').required('це поле обов`язкове'),
   number: yup.string().matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, "не правильно введено дані").required('це поле обов`язкове')
@@ -35,13 +35,11 @@ export const ContactForm = () => {
 
 const handleSubmit = (values, {resetForm})=> {
 const {name, number} = values;
-const contactData =  dispatch(setContactsList(name,number))
-if(contactList.some(el => el.name === contactData.payload.name)) {
-return  alert(`${name} is already in contacts`);
-
-};
+if(contactList.some(el => el.name === name)) {
+  return  alert(`${name} is already in contacts`);
+  };
+dispatch(addContactsThunk({name, number}));
 resetForm();
-
 }
 
 return (

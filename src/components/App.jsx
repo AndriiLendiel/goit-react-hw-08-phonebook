@@ -3,9 +3,9 @@ import ContactForm from "./ContactForm/ContactForm";
 import { ContactList } from "./ContactsList/ContactsList";
 import { Filter } from "./Filter/Filter";
 import { MainWrapper } from "components/App.styled";
-
-
-
+import { useEffect } from "react";
+import { fetchContactsThunk } from "../redux/operations";
+import { useDispatch } from "react-redux";
 
 
 
@@ -15,6 +15,13 @@ import { MainWrapper } from "components/App.styled";
 
 export const App = () =>  {
 
+
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    dispatch(fetchContactsThunk())
+    }, [dispatch])
 return (
   <div
     style={{
