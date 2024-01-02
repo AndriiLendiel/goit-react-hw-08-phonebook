@@ -4,9 +4,8 @@ import {FormWrapper,MainForm,FormLabel,FormInput, FormButton, ErrorText} from ".
 import { useSelector,useDispatch } from "react-redux";
 import { Formik, ErrorMessage} from "formik";
 import * as yup from 'yup';
-import {setContactsList} from '../../redux/contactsSlice'
 import { getContacts } from "../../redux/selectors";
-import { fetchContactsThunk, addContactsThunk } from "../../redux/operations";
+import {addContactsThunk } from "../../redux/operations";
 const contactSchema = yup.object().shape({
   name: yup.string().matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, 'не правильно введено дані').required('це поле обов`язкове'),
   number: yup.string().matches(/\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/, "не правильно введено дані").required('це поле обов`язкове')
