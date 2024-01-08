@@ -23,14 +23,9 @@ const ErrorField = ({name}) => {
 }
 
 
-
 export const ContactForm = () => {
   const contactList = useSelector(getContacts);
   const dispatch = useDispatch();
-
-
-
-
 
 const handleSubmit = (values, {resetForm})=> {
 const {name, number} = values;

@@ -8,7 +8,7 @@ const handlePending = (state) => {
     state.isLoading = true
 }
 const handleFulfilled = (state,action) => {
-    state.contacts = action.payload;
+    state.items = action.payload;
     state.isLoading = false;
     state.error = null;
 }

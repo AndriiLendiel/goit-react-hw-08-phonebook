@@ -1,26 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Contact } from "../Contact/Contact";
 import { ContactList1 } from "./ContactList.styled";
 import { Title } from "utils/utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getContacts, getFilter } from "../../redux/selectors";
+import { fetchContactsThunk } from "../../redux/operations";
 
 
-
+const filteredList = (state) => {
+    return [...state.contacts.items.filter(el => el.name.toLowerCase().includes(state.filter))]
+}
 
 
 export const ContactList =() => {
 
-const contactList = useSelector(getContacts);
-
-const filter = useSelector(getFilter);
-const normalized = filter.toLowerCase();
-const visibleContacts = contactList.filter(el => (
-    el.name.toLowerCase().includes(normalized)
-))
 
 
-
+let visibleContacts = useSelector(filteredList)
 
     return (
         <div>
