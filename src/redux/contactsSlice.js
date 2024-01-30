@@ -15,7 +15,7 @@ const handleFulfilled = (state,action) => {
 
 const handleRejected = (state) => {
     state.error = true
-    console.log('ERROR');
+
 }
 
 export const initialState = contactsList.contacts

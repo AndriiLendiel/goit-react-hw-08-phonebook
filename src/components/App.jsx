@@ -1,27 +1,37 @@
+import { Routes, Route } from "react-router-dom";
 
-import ContactForm from "./ContactForm/ContactForm";
-import { ContactList } from "./ContactsList/ContactsList";
-import { Filter } from "./Filter/Filter";
-import { MainWrapper } from "components/App.styled";
-import { useEffect } from "react";
+
+
+import {  useEffect } from "react";
 import { fetchContactsThunk } from "../redux/operations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
+
+
+
+import { Layout } from "./Layuot/Layout";
+import { Main } from "./Main/Main";
+import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import { Toaster } from "react-hot-toast";
+import { PrivateRoute } from "./PrivateRoute";
+import { UnAuthPage } from "components/pages/UnAuthPage/UnAuthPage";
+import { RestrictedRoute } from "./RestrictedRoute";
 
 
 
 
 
 export const App = () =>  {
-
+const isLogged = useSelector(state => state.auth.isLogged)
 
   const dispatch = useDispatch()
 
 
   useEffect(() => {
-    dispatch(fetchContactsThunk())
-    }, [dispatch])
+dispatch(fetchContactsThunk())
+    }, [dispatch, isLogged])
 return (
   <div
     style={{
@@ -34,16 +44,33 @@ return (
       color: '#010101'
     }}
   >
-<MainWrapper>
-<ContactForm 
+  <>
+  <Toaster
+  position="top-rightr"
+  reverseOrder={false}
+/>
+    <Routes>
+      <Route path='/' element={<Layout/>}>
 
-/>
-<Filter 
-// value={filter}
-// onChange={createFilter}
-/>
-<ContactList/>  
-</MainWrapper>
+  {!isLogged ? 
+
+  <Route index element={<UnAuthPage/>}/> :
+  <Route index element={<PrivateRoute><Main/></PrivateRoute>}
+/> }
+
+      <Route path='/registration' element={
+<RestrictedRoute>
+<RegistrationPage />
+</RestrictedRoute>
+
+
+
+
+      }/>
+      <Route path='/login' element={<LoginPage/>}/>
+      </Route>
+    </Routes>
+  </>
   </div>
   
 )
