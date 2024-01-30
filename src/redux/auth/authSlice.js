@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit"
-import { loginThunk, logoutThunk, registrationThunk } from "./thunk";
+import { loginThunk, logoutThunk } from "./thunk";
 import { getProfileThunk } from "./thunk";
 
 
