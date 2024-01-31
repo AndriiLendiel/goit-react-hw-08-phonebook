@@ -1,10 +1,12 @@
 import { FormWrapper, MainForm, SubWrapperForm, FormLabel, FormInput, FormButton, Title } from "utils/utils";
-import { useDispatch } from "react-redux";
-import { loginThunk } from "../../../redux/auth/thunk";
+import { useDispatch,useSelector } from "react-redux";
+import { loginThunk } from "../../../redux/auth/auth-operations";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import {selectIsLoading} from '../../../redux/auth/auth-selectors'
+import {Hourglass} from 'react-loader-spinner'
 const LoginPage = () => {
-
+const isLoading = useSelector(selectIsLoading)
 	const dispatch = useDispatch()
 const navigate = useNavigate()
 
@@ -23,7 +25,22 @@ e.preventDefault();
 	}
 
 	return (
-		<div>
+
+		<>
+		{isLoading ?
+<div style={{display: 'flex', alignItems: 'center', height: '60%'}}>
+<Hourglass 
+visible={true}
+height="80"
+width="100%"
+ariaLabel="hourglass-loading"
+wrapperStyle={{}}
+wrapperClass=""
+colors={['#306cce', '#72a1ed']}
+/>
+</div> :
+			
+			<div>
 			<Title>Login</Title>
 <FormWrapper>
 <MainForm  onSubmit={handleSubmit}>
@@ -58,7 +75,9 @@ e.preventDefault();
 			</MainForm>
 </FormWrapper>
 
-		</div>
+		</div> 
+		}
+		</>
 	)
 }
 

@@ -1,7 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-
-
-
 import {  useEffect } from "react";
 import { fetchContactsThunk } from "../redux/operations";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,13 +15,14 @@ import { Toaster } from "react-hot-toast";
 import { PrivateRoute } from "./PrivateRoute";
 import { UnAuthPage } from "components/pages/UnAuthPage/UnAuthPage";
 import { RestrictedRoute } from "./RestrictedRoute";
+import { selectIsLogged } from "../redux/auth/auth-selectors";
 
 
 
 
 
 export const App = () =>  {
-const isLogged = useSelector(state => state.auth.isLogged)
+const isLogged = useSelector(selectIsLogged)
 
   const dispatch = useDispatch()
 
@@ -49,14 +47,14 @@ return (
   position="top-rightr"
   reverseOrder={false}
 />
+
     <Routes>
       <Route path='/' element={<Layout/>}>
 
-  {!isLogged ? 
+  {!isLogged ?
 
   <Route index element={<UnAuthPage/>}/> :
-  <Route index element={<PrivateRoute><Main/></PrivateRoute>}
-/> }
+  <Route index element={<PrivateRoute>{<Main/>}</PrivateRoute>}/>}
 
       <Route path='/registration' element={
 <RestrictedRoute>
@@ -65,8 +63,7 @@ return (
 
 
 
-
-      }/>
+}/>
       <Route path='/login' element={<LoginPage/>}/>
       </Route>
     </Routes>

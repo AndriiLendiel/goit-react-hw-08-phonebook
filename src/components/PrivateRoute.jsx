@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux"
-
 import { Navigate } from "react-router-dom"
+import { selectIsLoading, selectIsLogged } from "../redux/auth/auth-selectors"
 
 export const PrivateRoute = ({children}) => {
-    const isLogged = useSelector(state => state.auth.isLogged)
-    const isLoading = useSelector(state => state.auth.isLoading)
+    const isLogged = useSelector(selectIsLogged)
+    const isLoading = useSelector(selectIsLoading)
     const shouldRedirect = !isLogged && !isLoading
 
 return shouldRedirect ?  <Navigate to = '/'/> 

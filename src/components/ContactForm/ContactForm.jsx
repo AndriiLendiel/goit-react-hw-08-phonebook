@@ -1,4 +1,6 @@
 import React from "react";
+import { IoMdContact } from "react-icons/io";
+import { BsFillTelephoneFill } from "react-icons/bs";
 import { Title } from "utils/utils";
 import {FormWrapper,MainForm,FormLabel,FormInput, FormButton, ErrorText} from "./ContactForm.styled";
 import { useSelector,useDispatch } from "react-redux";
@@ -23,7 +25,7 @@ const ErrorField = ({name}) => {
 }
 
 
-export const ContactForm = () => {
+ const ContactForm = () => {
   const contactList = useSelector(getContacts);
   const dispatch = useDispatch();
 
@@ -46,7 +48,19 @@ return (
     >
     <MainForm  
     >
-    <FormLabel> Name 
+    <FormLabel> 
+
+    <span>Name </span>
+    <div style={{
+      position: 'relative',
+    }}>    
+    <IoMdContact  style={{
+            position: 'absolute',
+            left: '10px',
+            top: '10px',
+            width: '30px',
+    }}/>
+
     <FormInput
 
 type="text"
@@ -55,11 +69,27 @@ pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
 required
 
-/>
+/></div>
+
 <ErrorField name="name"/>
 </FormLabel>
 
-<FormLabel>Tel 
+<FormLabel> 
+
+<span>Tel</span> 
+
+<div style={{
+      position: 'relative',
+    }}>
+<BsFillTelephoneFill style={{
+            position: 'absolute',
+            left: '10px',
+            top: '10px',
+            height: '30px',
+            width: '25px'
+    }}/>
+
+
 <FormInput
 type="tel"
 name="number"
@@ -68,6 +98,8 @@ title="Phone number must be digits and can contain spaces, dashes, parentheses a
 required
 
 />
+</div>
+
 <ErrorField name="number"/>
 
 

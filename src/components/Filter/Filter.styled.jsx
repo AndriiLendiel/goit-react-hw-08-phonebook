@@ -18,7 +18,7 @@ color: ${theme.colors.textColor};
 
 
 export const FilterInput = styled.input`
-width: 80%;
+width: 90%;
 height: 25px;
 font-size: 24px;
 background-color: grey;
@@ -26,4 +26,6 @@ opacity: 0.6;
 color: black;
 border-radius: 6px;
 padding: 8px;
+padding-left: 45px;
+
 `

@@ -3,15 +3,19 @@ import { Contact } from "../Contact/Contact";
 import { ContactList1 } from "./ContactList.styled";
 import { Title } from "utils/utils";
 import {useSelector } from "react-redux";
+import {getContacts} from '../../redux/selectors.js'
 
 
 
-const filteredList = (state) => {
-    return [...state.contacts.items.filter(el => el.name.toLowerCase().includes(state.filter))]
+
+ const ContactList =() => {
+const isItems = useSelector(getContacts)
+    const filteredList = (state) => {
+if(!isItems) {
+    return
 }
-
-export const ContactList =() => {
-
+   return [...state.contacts.items.filter(el => el.name.toLowerCase().includes(state.filter))] 
+    }
 
 
 let visibleContacts = useSelector(filteredList)
@@ -20,7 +24,7 @@ let visibleContacts = useSelector(filteredList)
         <div>
             <Title>Contacts</Title>
             <ContactList1>
-        {visibleContacts.map(el => (
+        {visibleContacts?.map(el => (
         <Contact key={el.id} data={el}/>)) 
         }
         </ContactList1>
@@ -28,3 +32,4 @@ let visibleContacts = useSelector(filteredList)
         
     )
 }
+export default ContactList

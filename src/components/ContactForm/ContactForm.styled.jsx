@@ -15,6 +15,7 @@ margin-top: ${theme.values.blockMargin};
 `
 
 export const MainForm = styled(Form)`
+
 display: grid;
 grid-template-columns: 1fr 1fr;
 justify-items: center;
@@ -22,18 +23,21 @@ justify-items: center;
 `
 
 export const FormLabel = styled.label`
+
 font-size: 36px;
 color: ${theme.colors.textColor};
-
+width: 100%;
 `
 
 export const FormInput = styled(Field)`
+
 height: 25px;
 font-size: 24px;
 background-color: grey;
 opacity: 0.6;
 color: black;
 padding: 8px;
+padding-left: 40px;
 border-radius: 6px;
 
 `

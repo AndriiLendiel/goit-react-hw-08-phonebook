@@ -1,6 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit"
-import { loginThunk, logoutThunk } from "./thunk";
-import { getProfileThunk } from "./thunk";
+import { getProfileThunk, registrationThunk, loginThunk, logoutThunk } from "./auth-operations";
 
 
 const initialState = {
@@ -46,8 +45,8 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) =>{
 builder
-// .addCase(registrationThunk.pending, handlePending)
-// .addCase(registrationThunk.fulfilled, handleFulfilled)
+.addCase(registrationThunk.pending, handlePending)
+.addCase(registrationThunk.fulfilled, handleFulfilled)
 .addCase(loginThunk.fulfilled, handleFulfilled)
 .addCase(getProfileThunk.fulfilled, handleFulfilledProfile)
 .addCase(logoutThunk.fulfilled, handleFulfilledLogout)

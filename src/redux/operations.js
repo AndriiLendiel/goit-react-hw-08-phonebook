@@ -8,6 +8,11 @@ import { addContacts, fetchContacts,deleteContacts } from "service/API";
 export const fetchContactsThunk = createAsyncThunk(
     'contacts/fetchContacts',
     async (_, thunkAPI) => {
+
+        const {token} = thunkAPI.getState().auth
+        if(!token) {
+            return
+        }
 try {
     return await fetchContacts()
 } catch (error) {
